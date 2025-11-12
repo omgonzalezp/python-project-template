@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # ----------------------------------------------------
+  # 1. SERVICIO DE LA APLICACIÓN PYTHON (APP)
+  # ----------------------------------------------------
+  app:
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+      target: dev 
+
+    volumes:
+      # BIND MOUNT PARA EL CÓDIGO: Mapea src/ a /src (Raíz del Código Python)
+      - ../src:/src:cached 
+      
+    env_file:
+      - ../.env.dev 
+      
+    # Comando de desarrollo (puede ser python main.py o un servidor de Flask)
+    command: python /src/main.py
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_started 
+      redis:
+        condition: service_started
+  
+  # ----------------------------------------------------
+  # 2. SERVICIO DE BASE DE DATOS POSTGRESQL (DB)
+  # ----------------------------------------------------
+  db:
+    image: postgres:latest
+    container_name: python_postgres_db
+    restart: unless-stopped
+    
+    volumes:
+      - ../postgres_data:/var/lib/postgresql/data
+      
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+
+  # ----------------------------------------------------
+  # 3. SERVICIO DE REDIS
+  # ----------------------------------------------------
+  redis:
+    image: redis:7
+    container_name: python_redis
+    ports:
+      - "6379:6379"

@@ -1,0 +1,14 @@
+# ... (otras secciones de Python y caché)
+
+# ==============================================================================
+# ARCHIVOS GENERADOS Y DATOS DE LA APP PYTHON
+# ==============================================================================
+# Logs, bases de datos de desarrollo, etc., dentro de src/
+src/*.sqlite3
+src/*.log
+src/__pycache__/
+
+# Directorios de Docker y datos
+/postgres_data/
+
+# ... (el resto de las secciones .env, etc., se mantienen igual)

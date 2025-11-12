@@ -1,0 +1,12 @@
+# Dependencias principales del proyecto
+gunicorn       # Servidor WSGI/ASGI para producción (más flexible que Daphne)
+psycopg2-binary # Adaptador de PostgreSQL
+python-dotenv  # Manejo de variables de entorno
+
+# Opcionales para web/async (ej: si usas Flask/FastAPI)
+flask
+redis
+
+# Para integración de Tailwind CLI (si se requiere)
+# NOTA: En Python genérico, la integración suele ser manual o usando un paquete específico.
+# Mantendremos la instalación de la CLI en el Dockerfile para flexibilidad.
