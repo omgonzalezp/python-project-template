@@ -38,7 +38,13 @@ services:
     
     volumes:
       - ../postgres_data:/var/lib/postgresql_data
-      
+
+     # Opcional: Cargar variables DB_USER/PASS de .env.dev para inicializar Postgres
+    # environment:
+    #   POSTGRES_USER: ${DB_USER}
+    #   POSTGRES_DB: ${DB_NAME}
+    #   POSTGRES_PASSWORD: ${DB_PASSWORD}
+    # NOTA: Usamos valores literales aquí por simplicidad con Postgres:  
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
@@ -49,6 +55,6 @@ services:
   # ----------------------------------------------------
   redis:
     image: redis:7
-    container_name: python_redis
+    container_name: redis
     ports:
       - "6379:6379"
