@@ -14,10 +14,10 @@ RUN apt-get update \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /tmp/app
+WORKDIR /tmp/src
 
 # Copia los requisitos e instala
-COPY requirements.txt /tmp/app/
+COPY requirements.txt /tmp/src/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # INSTALACIÓN DE TAILWINDCSS CLI STANDALONE 

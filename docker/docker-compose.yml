@@ -18,7 +18,8 @@ services:
       - ../.env.dev 
       
     # Comando de desarrollo (puede ser python main.py o un servidor de Flask)
-    command: python /src/main.py
+    # command: python /src/main.py
+    command: ["tail", "-f", "/dev/null"]
     ports:
       - "8000:8000"
     depends_on:
@@ -36,7 +37,7 @@ services:
     restart: unless-stopped
     
     volumes:
-      - ../postgres_data:/var/lib/postgresql/data
+      - ../postgres_data:/var/lib/postgresql_data
       
     environment:
       POSTGRES_USER: postgres
